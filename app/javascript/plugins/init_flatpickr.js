@@ -7,17 +7,11 @@ const initFlatpickr = () => {
   if (datePicker) {
     flatpickr(".datepicker", {
       minDate: "today",
-      dateFormat: "d/m/Y",
-      disableMobile: true
+      altInput: true,
+      altFormat: "j F Y",
+      dateFormat: "Y-m-d"
     });
   }
 }
 
 export { initFlatpickr }
-
-
-// flatpickr(".datepicker", {
-//   altInput: true,
-//   altFormat: "j F Y",
-//   dateFormat: "Y-m-d",
-// });
