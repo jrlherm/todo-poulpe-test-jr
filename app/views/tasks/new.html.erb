@@ -13,10 +13,17 @@
       <%= f.input :description,
                   as: :text,
                   # label: false,
-                  placeholder: "Type a description*",
+                  placeholder: "Type a description",
                   input_html: { class: "col-12 mb-3" } %>
-
-      <%= f.input :deadline, as: :string, required: false, input_html: {class: "datepicker"} %>
+      <div class="d-flex mx-0 px-0">
+        <div class="col-6 pl-0">
+          <%= f.input :priority, collection: 1..5, prompt: "Select priority", selected: 1, input_html: {class: "flex-grow-1"} %>
+        </div>
+        <div class="col-6 pr-0">
+          <%= f.input :deadline, as: :string, required: false, input_html: {class: "datepicker"} %>
+        </div>
+      </div>
+      <%= f.input :finished, :label => "Already finished?!", as: :radio_buttons %>
 
       <%= f.submit 'Validate', class: "mt-2 btn btn-primary rounded-pill d-block col-12" %>
     <% end %>
