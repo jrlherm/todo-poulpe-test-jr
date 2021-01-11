@@ -6,9 +6,20 @@
       <% if current_user.tasks.empty? %>
         <p>You have no tasks to do yet. <a href="#">Add a task</a></p>
       <% else %>
-        <ul>
+        <ul class="list-unstyled text-left">
           <% @tasks.each do |task| %>
-            <li><a href="/tasks/<%= task.id %>"><%= task.title %></a></li>
+            <a href="/tasks/<%= task.id %>">
+              <li>
+                <div class="card mb-2">
+                  <div class="card-body d-flex flex-row align-items-baseline">
+                    <h5 class="flex-grow-1"><%= task.title.capitalize %></h5>
+                    <% if task.deadline %>
+                      <p><strong><i class="far fa-clock"></i>Deadline: </strong><%= task.deadline %></p>
+                    <% end %>
+                  </div>
+                </div>
+              </li>
+            </a>
           <% end %>
         </ul>
       <% end %>

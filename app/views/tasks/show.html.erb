@@ -2,16 +2,28 @@
   <div class="col-12 col-md-8 offset-md-2 text-center">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">
-          <%= @task.title %>
-        </h5>
+        <h3 class="card-title">
+          <%= @task.title.upcase %>
+        </h3>
         <p class="card-content">
           <%= @task.description %>
         </p>
+
         <% if @task.deadline? %>
-          <p><%= @task.deadline %></p>
+          <p><strong>Deadline:</strong> <%= @task.deadline %></p>
         <% else %>
-          <p>No deadline</p>
+          <p><strong>Deadline:</strong> Not set.</p>
+        <% end %>
+
+        <% if @task.finished? %>
+          <p><strong>Status:</strong> Task is done. Undo?</p>
+        <% else %>
+
+            <p><strong>Status:</strong> Unfinished.
+              <%= link_to "#" do %>
+                Mark as done
+              <% end %>
+            </p>
         <% end %>
       </div>
     </div>

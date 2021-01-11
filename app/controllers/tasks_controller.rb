@@ -21,6 +21,15 @@ class TasksController < ApplicationController
     end
   end
 
+  def mark_as_done
+    @task = Task.find(params[:id])
+    @task.finished = true
+    @task.save
+
+    redirect_to root_path, notice: "Todo item completed"
+
+  end
+
   private
 
   def task_params
