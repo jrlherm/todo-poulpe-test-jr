@@ -11,14 +11,17 @@
                   placeholder: "Enter a title for your task*",
                   input_html: { class: "col-12 mb-3" } %>
       <%= f.input :description,
+                  as: :text,
                   # label: false,
                   placeholder: "Type a description*",
                   input_html: { class: "col-12 mb-3" } %>
+
+      <%= f.input :deadline, as: :string, required: false, input_html: {class: "datepicker"} %>
+
       <%= f.submit 'Validate', class: "mt-2 btn btn-primary rounded-pill d-block col-12" %>
-
-
     <% end %>
-
-
+    <div class="text-center">
+      <%= link_to "Cancel", root_path, class: 'btn btn-outline-danger rounded-pill col-12 mt-3' %>
+    </div>
   </div>
 </div>
