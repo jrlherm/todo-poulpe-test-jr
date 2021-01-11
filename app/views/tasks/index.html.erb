@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="col-12 col-md-8 offset-md-2">
+    <div class="text-center mt-3">
+      <h1>My Tasks</h1>
+      <p>Always do your best.</p>
+      <% if current_user.tasks.empty? %>
+        <p>You have no tasks to do yet. <a href="#">Add a task</a></p>
+      <% else %>
+        <ul>
+          <% @tasks.each do |task| %>
+            <li><a href="/tasks/<%= task.id %>"><%= task.title %></a></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+</div>
