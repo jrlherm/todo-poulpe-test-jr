@@ -25,6 +25,8 @@
               <% end %>
             </p>
         <% end %>
+
+        <%= link_to "Delete", task_path(@task), data: {confirm: "Are you sure?"}, :method => :delete %>
       </div>
     </div>
   </div>
