@@ -9,6 +9,11 @@
           <%= @task.description %>
         </p>
 
+        <% if @task.priority? %>
+          <p><strong>priority:</strong> <%= @task.priority %></p>
+
+        <% end %>
+
         <% if @task.deadline? %>
           <p><strong>Deadline:</strong> <%= @task.deadline %></p>
         <% else %>
@@ -18,9 +23,7 @@
         <% if @task.finished? %>
           <p><strong>Status:</strong> Task is finished.</p>
         <% else %>
-
-            <p><strong>Status:</strong> Unfinished.
-            </p>
+          <p><strong>Status:</strong> Unfinished.</p>
         <% end %>
 
         <%= link_to "Update", edit_task_path(@task)  %> | 
