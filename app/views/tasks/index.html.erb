@@ -11,11 +11,14 @@
             <a href="/tasks/<%= task.id %>">
               <li>
                 <div class="card mb-2">
-                  <div class="card-body d-flex flex-row align-items-baseline">
+                  <div class="card-body d-flex flex-row align-items-center">
                     <h5 class="flex-grow-1"><%= task.title.capitalize %></h5>
-                    <% if task.deadline %>
-                      <p><strong><i class="far fa-clock"></i>Deadline: </strong><%= task.deadline %></p>
-                    <% end %>
+                    <div class="ml-auto text-right">
+                      <% if task.deadline %>
+                        <p class="mb-1"><small><strong><i class="far fa-clock"></i> Deadline:</strong><br><%= task.deadline %></small></p>
+                      <% end %>
+                      <p class="mb-0"><%= link_to "Mark as done", root_path %></p>
+                    </div>
                   </div>
                 </div>
               </li>
