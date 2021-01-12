@@ -30,5 +30,24 @@
         <%= link_to "Delete", task_path(@task), data: {confirm: "Are you sure?"}, :method => :delete %>
       </div>
     </div>
+    <div class="comments">
+      <h4 class="text-left mt-3">Comments</h4>
+      <% @task.comments.each do |comment| %>
+        <div class="comment card mb-1">
+          <div class="card-body">
+            <%= comment.content %>
+            <p style="mb-0"><small><strong>Added:</strong><%= comment.created_at %></small></p>
+
+
+            <%= link_to "Delete commment", task_comment_path(@task.id, comment.id), :method => :delete %>
+          </div>
+        </div>
+      <% end %>
+
+      <%= simple_form_for [@task, @comment] do |f| %>
+        <%= f.input :content %>
+        <%= f.submit class: 'btn btn-primary' %>
+      <% end %>
+    </div>
   </div>
 </div>
