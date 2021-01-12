@@ -1,19 +1,23 @@
 class TasksController < ApplicationController
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :finished]
+
   def index
-    @tasks = current_user.tasks
+    @tasks = policy_scope(Task)
+  end
+
+  def show
   end
 
   def new
     @task = Task.new
-  end
-
-  def show
-    @task = Task.find(params[:id])
+    authorize @task
   end
 
   def create
     @task = Task.new(task_params)
     @task.user_id = current_user.id
+    authorize @task
+
     if @task.save
       redirect_to tasks_path, notice: "Task created"
     else
@@ -21,12 +25,11 @@ class TasksController < ApplicationController
     end
   end
 
+
   def edit
-    @task = Task.find(params[:id])
   end
 
   def update
-    @task = Task.find(params[:id])
     @task.update(task_params)
     @task.save
     # raise
@@ -34,14 +37,12 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task = Task.find(params[:id])
     @task.destroy
 
     redirect_to tasks_path, notice: "Task deleted"
   end
 
   def finished
-    @task = Task.find(params[:id])
     @task.finished = true
     @task.save
 
@@ -52,5 +53,10 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:title, :description, :deadline, :finished, :priority)
+  end
+
+  def set_task
+    @task = Task.find(params[:id])
+    authorize @task
   end
 end
