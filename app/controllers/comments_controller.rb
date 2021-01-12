@@ -12,8 +12,7 @@ class CommentsController < ApplicationController
     authorize @comment
 
     if @comment.save
-      flash[:success] = "Comment successfully added"
-      redirect_to task_path(@task)
+      redirect_to task_path(@task, anchor: "comment-#{@comment.id}"), notice: "Comment added"
     else
       render 'tasks/show'
     end
@@ -25,7 +24,11 @@ class CommentsController < ApplicationController
     authorize @comment
     @comment.destroy
 
-    redirect_to task_path(@task)
+    redirect_to task_path(@task, anchor: "comment-#{
+    if !@task.comments.empty?
+      @task.comments.first.id
+    end
+    }"), notice: "Comment deleted"
   end
 
   private

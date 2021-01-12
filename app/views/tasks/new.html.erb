@@ -5,9 +5,8 @@
       <p>Enter infos.</p>
     </div>
 
-    <%= simple_form_for [@task] do |f| %>
+    <%= simple_form_for([@task], remote: true) do |f| %>
       <%= f.input :title,
-                  # label: false,
                   placeholder: "Enter a title for your task*",
                   input_html: { class: "col-12 mb-3" } %>
       <%= f.input :description,
