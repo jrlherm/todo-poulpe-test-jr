@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="col-12 col-md-8 offset-md-2">
+    <div class="text-center mt-3">
+      <h1>Add a new comment</h1>
+      <p>Enter infos.</p>
+    </div>
+
+    <%= simple_form_for [@task, @comment] do |f| %>
+      <%= f.input :content,
+                  # label: false,
+                  placeholder: "Type your comment here",
+                  input_html: { class: "col-12 mb-3" } %>
+      <%= f.submit 'Validate', class: "mt-2 btn btn-primary rounded-pill d-block col-12" %>
+    <% end %>
+    <div class="text-center">
+      <%= link_to "Cancel", task_path(@task), class: 'btn btn-outline-danger rounded-pill col-12 mt-3' %>
+    </div>
+  </div>
+</div>
