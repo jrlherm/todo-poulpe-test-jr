@@ -33,21 +33,27 @@
     <div class="comments">
       <h4 class="text-left mt-3">Comments</h4>
       <% @task.comments.each do |comment| %>
-        <div class="comment card mb-1">
+        <div class="comment card mb-1" id="comment-<%= comment.id %>">
           <div class="card-body">
             <%= comment.content %>
             <p style="mb-0"><small><strong>Added:</strong><%= comment.created_at %></small></p>
-
-
-            <%= link_to "Delete commment", task_comment_path(@task.id, comment.id), :method => :delete %>
+            <%= link_to "Delete comment", task_comment_path(@task.id, comment.id), remote: true, :method => :delete %>
           </div>
         </div>
       <% end %>
 
-      <%= simple_form_for [@task, @comment] do |f| %>
-        <%= f.input :content %>
-        <%= f.submit class: 'btn btn-primary' %>
+      <%= simple_form_for([@task, @comment], remote:true) do |f| %>
+        <h6 class="text-left mt-3 font-weight-bold">Add a comment</h6>
+        <%= f.input :content,
+                  as: :text,
+                  label: false,
+                  placeholder: "Type your comment",
+                  input_html: { class: "col-12 mb-3" } %>
+        <div class="text-right">
+          <%= f.submit class: 'btn btn-primary' %>
+        </div>
       <% end %>
+
     </div>
   </div>
 </div>
