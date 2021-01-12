@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
       flash[:success] = "Comment successfully added"
       redirect_to task_path(@task)
     else
-      render 'new'
+      render 'tasks/show'
     end
   end
 
@@ -35,6 +35,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.permit(:content)
+    params.require(:comment).permit(:content)
   end
 end
