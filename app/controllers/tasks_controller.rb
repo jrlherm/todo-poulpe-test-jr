@@ -34,7 +34,7 @@ class TasksController < ApplicationController
   def update
     @task.update(task_params)
     @task.save
-    # raise
+
     redirect_to task_path(@task), notice: "Task updated"
   end
 
