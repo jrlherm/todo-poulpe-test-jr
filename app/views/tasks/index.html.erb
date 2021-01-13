@@ -4,7 +4,7 @@
       <h1>My Tasks</h1>
       <p>Always do your best.</p>
 
-      <% if current_user.tasks.where(finished: true).empty? %> <!-- IF user has NO tasks -->
+      <% if current_user.tasks.empty? %> <!-- IF user has NO tasks -->
         <p>You have no tasks to do yet.</p>
       <% else %>
         <h3 class="text-left">To do</h3>
