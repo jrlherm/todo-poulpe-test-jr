@@ -19,14 +19,12 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.user_id = current_user.id
     authorize @task
-
     if @task.save
       redirect_to tasks_path(anchor: "task-#{@task.id}"), notice: "Task created"
     else
       render :new
     end
   end
-
 
   def edit
   end
@@ -38,12 +36,6 @@ class TasksController < ApplicationController
     redirect_to task_path(@task), notice: "Task updated"
   end
 
-  def destroy
-    @task.destroy
-
-    redirect_to tasks_path, notice: "Task deleted"
-  end
-
   def finished
     @task.finished = true
     @task.save
@@ -51,10 +43,16 @@ class TasksController < ApplicationController
     redirect_to tasks_path, notice: "Task completed"
   end
 
+  def destroy
+    @task.destroy
+
+    redirect_to tasks_path, notice: "Task deleted"
+  end
+
   private
 
   def task_params
-    params.require(:task).permit(:title, :description, :deadline, :priority)
+    params.require(:task).permit(:finished, :title, :description, :deadline, :priority)
   end
 
   def set_task
