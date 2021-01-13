@@ -3,6 +3,8 @@ class TasksController < ApplicationController
 
   def index
     @tasks = policy_scope(Task)
+    @todo_tasks = @tasks.where(finished: false)
+    @finished_tasks = @tasks.where(finished: true)
     @task = Task.new
   end
 
