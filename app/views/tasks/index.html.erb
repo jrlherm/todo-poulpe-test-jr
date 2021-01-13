@@ -4,11 +4,12 @@
       <h1>My Tasks</h1>
       <p>Always do your best.</p>
 
-      <% if current_user.tasks.empty? %> <!-- IF user has NO tasks -->
+      <% if current_user.tasks.where(finished: true).empty? %> <!-- IF user has NO tasks -->
         <p>You have no tasks to do yet.</p>
       <% else %>
+        <h3 class="text-left">To do</h3>
         <ul class="list-unstyled text-left"> <!-- IF user has tasks -->
-          <% @tasks.each do |task| %>
+          <% @todo_tasks.each do |task| %>
             <li>
               <a href="/tasks/<%= task.id %>" id="task-<%= task.id %>">
                 <div class="card mb-2">
@@ -88,6 +89,57 @@
         <%= f.submit 'Validate',
                       class: "mt-2 mb-5 btn btn-primary rounded-pill d-block col-12" %>
       <% end %>
+
+      <hr class="mt-5">
+
+      <!-- Finished task -->
+      <h3 class="text-left">Finished task</h3>
+        <ul class="list-unstyled text-left"> <!-- IF user has tasks -->
+          <% @finished_tasks.each do |task| %>
+            <li>
+              <a href="/tasks/<%= task.id %>" id="task-<%= task.id %>">
+                <div class="card mb-2">
+                  <div class="p-3 d-flex flex-row align-items-center">
+
+                    <!-- Finish task -->
+                    <%= link_to tasks_path, remote: true do %>
+                    <% end %>
+
+                    <%= link_to finished_task_path(task), method: :put, remote: true do %>
+                      <h1 class="mb-0 mr-3">
+                        <i class="fas fa-check-circle finished-button"></i>
+                      </h1>
+                    <% end %>
+
+                    <div class="flex-grow-1">
+                      <!-- Task Deadline -->
+                      <% if task.deadline %>
+                        <div class="mb-2">
+                          <p class="mb-1"><small><strong><i class="far fa-clock"></i> Deadline:</strong> <%= task.deadline %></small></p>
+                        </div>
+                      <% end %>
+                      <!-- Task title -->
+                      <h5><%= link_to task.title.capitalize, task_path(task) %></h5>
+                    </div>
+
+                    <div class="ml-auto">
+                      <div class="mb-3">
+                          <!-- Edit task -->
+                          <%= link_to edit_task_path(task) do %>
+                            <i class="fas fa-pencil-alt mr-2"></i>
+                          <% end %>
+                          <!-- Delete task -->
+                          <%= link_to task_path(task), data: {confirm: "Are you sure?"}, remote: true, :method => :delete do %>
+                            <i class="fas fa-trash-alt"></i>
+                          <% end %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </a>
+            </li>
+          <% end %>
+        </ul>
 
     </div>
   </div>
