@@ -3,6 +3,7 @@ class TasksController < ApplicationController
 
   def index
     @tasks = policy_scope(Task)
+    @task = Task.new
   end
 
   def show
@@ -20,7 +21,7 @@ class TasksController < ApplicationController
     authorize @task
 
     if @task.save
-      redirect_to tasks_path, notice: "Task created"
+      redirect_to tasks_path(anchor: "task-#{@task.id}"), notice: "Task created"
     else
       render :new
     end
