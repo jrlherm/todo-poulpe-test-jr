@@ -16,6 +16,9 @@
 
                     <!-- Finish task -->
                     <%= link_to tasks_path, remote: true do %>
+                    <% end %>
+
+                    <%= link_to finished_task_path(task), method: :put, remote: true do %>
                       <h1 class="mb-0 mr-3">
                         <i class="fas fa-check-circle finished-button"></i>
                       </h1>
@@ -29,7 +32,7 @@
                         </div>
                       <% end %>
                       <!-- Task title -->
-                      <h5><%= link_to task.title.capitalize, task_path(task)  %></h5>
+                      <h5><%= link_to task.title.capitalize, task_path(task) %></h5>
                     </div>
 
                     <div class="ml-auto">
