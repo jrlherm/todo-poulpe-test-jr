@@ -1,7 +1,14 @@
 .finished-button {
   color: rgb(0,200,0);
+}
+
+.undo-finished-button {
+  color: rgb(228, 174, 58);
+}
+
+.btn-hover {
   opacity: 0.1;
-  transition-duration: .3s;
+  transition-duration: .15s;
 
   &:hover {
     opacity: 1;

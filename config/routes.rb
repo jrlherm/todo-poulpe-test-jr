@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     member do
       patch :finished
       put :finished
+      patch :undo_finished
+      put :undo_finished
     end
     resources :comments, only: [:create, :destroy]
   end
