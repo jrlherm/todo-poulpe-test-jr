@@ -21,6 +21,11 @@ class TaskPolicy < ApplicationPolicy
   def finished?
     record.user == user
   end
+
+  def undo_finished?
+    record.user == user
+  end
+
   def destroy?
     record.user == user
   end

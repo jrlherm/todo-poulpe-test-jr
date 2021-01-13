@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :finished]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :finished, :undo_finished]
 
   def index
     @tasks = policy_scope(Task)
@@ -43,6 +43,13 @@ class TasksController < ApplicationController
     @task.save
 
     redirect_to tasks_path, notice: "Task completed"
+  end
+
+  def undo_finished
+    @task.finished = false
+    @task.save
+
+    redirect_to tasks_path, notice: "Task undone"
   end
 
   def destroy
