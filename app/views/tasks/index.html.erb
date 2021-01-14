@@ -1,18 +1,18 @@
 <div class="container">
   <div class="col-12 col-md-8 offset-md-2">
     <div class="text-center mt-3">
-      <h1>My Tasks</h1>
-      <p>Always do your best.</p>
+      <h1 class="font-weight-bolder">My Tasks</h1>
+      <p class="font-weight-light">Always do your best.</p>
 
       <!-- Tasks ToDo -->
       <% if !@tasks.where(finished: false).empty? %>
-        <h3 class="text-left">To do</h3>
+        <h3 class="text-left mb-3 font-weight-bold">To do <small>(<%= @tasks.where(finished: false).count %>)</small></h3>
           <!-- IF user has tasks -->
           <div data-controller="drag" data-drag-url="/tasks/:id/move">
             <% @todo_tasks.order(position: :asc).each do |task| %>
               <div data-id="<%= task.id %>">
                 <a href="/tasks/<%= task.id %>" id="task-<%= task.id %>">
-                  <div class="card mb-2">
+                  <div class="card mb-3 task-list">
                     <div class="p-3 d-flex flex-row align-items-center">
 
                       <!-- Finish task -->
@@ -26,7 +26,7 @@
                         <!-- Task Deadline -->
                         <% if task.deadline %>
                           <div class="mb-2">
-                            <p class="mb-1 text-left"><small><strong><i class="far fa-clock"></i> Deadline:</strong> <%= task.deadline %></small></p>
+                            <p class="mb-1 text-left"><small><strong><i class="far fa-calendar-alt"></i></strong> <%= task.deadline %></small></p>
                           </div>
                         <% end %>
                         <!-- Task title -->
@@ -66,18 +66,20 @@
       <% end %>
 
       <!-- New task form -->
-      <div class="card card-body pb-0" id="new-task">
+      <div class="card card-body pb-0 task-list" id="new-task">
         <%= simple_form_for([@task], remote: true) do |f| %>
           <h5 class="text-left mb-3">New task</h5>
           <div class="d-flex mx-0 px-0">
             <div class="col-6 pl-0">
               <%= f.input :title,
                           label: false,
+                          required: true,
                           placeholder: "Enter a title*",
                           input_html: { class: "mb-3" } %>
             </div>
             <div class="col-3 pl-0">
               <%= f.input :priority,
+                          required: false,
                           label: false,
                           collection: 1..5,
                           prompt: "Priority",
@@ -93,6 +95,12 @@
                           input_html: {class: "datepicker"} %>
             </div>
           </div>
+          <%= f.input :description,
+                  as: :text,
+                  required: false,
+                  label: false,
+                  placeholder: "Type a description",
+                  input_html: { class: "col-12 mb-3" } %>
 
           <%= f.submit 'Validate',
                         class: "mt-2 mb-4 btn btn-primary rounded-pill d-block col-12" %>
@@ -103,15 +111,15 @@
       <!-- Finished task -->
       <% if !@tasks.where(finished: true).empty? %>
         <hr class="mt-4 mb-4">
-        <h5 class="text-left my-3" style="opacity:.7">Finished task</h5>
+        <h5 class="text-left my-3" style="opacity:.7">Finished tasks <small>(<%= @tasks.where(finished: true).count %>)</small></h5>
         <ul class="list-unstyled text-left"> <!-- IF user has tasks -->
           <% @finished_tasks.each do |task| %>
             <li>
               <a href="/tasks/<%= task.id %>" id="task-<%= task.id %>">
-                <div class="card mb-2">
+                <div class="card mb-2 task-list">
                   <div class="p-3 d-flex flex-row align-items-center">
 
-                    <!-- Finish task -->
+                    <!-- Undo Finished task -->
                     <%= link_to undo_finished_task_path(task), method: :put, remote: true do %>
                       <h5 class="mb-0 mr-3">
                         <i class="fas fa-undo undo-finished-button btn-hover"></i>

@@ -14,7 +14,6 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
-    head :ok
     authorize @task
   end
 
