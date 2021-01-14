@@ -1,0 +1,43 @@
+.task-list {
+  border-radius: 12px;
+  background: white;
+  /* White background */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .1);
+  /* Light shadow */
+  cursor: grab;
+
+  a {
+    color: rgba(0, 0, 0, .8);
+  }
+}
+
+.task-card {
+  border-radius: 25px;
+  background: white;
+  /* White background */
+  padding: 30px;
+  /* Internal space */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .1);
+  /* Light shadow */
+}
+
+#comment_content {
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .05);
+  padding: 15px;
+  padding-right: 65px;
+  resize: none;
+  font-size: 14px;
+  ;
+}
+
+.comment-content {
+  color: rgba(0, 0, 0, .7)
+}
+
+.send-comment-button {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+}
