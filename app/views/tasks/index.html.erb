@@ -12,7 +12,7 @@
             <% @todo_tasks.order(position: :asc).each do |task| %>
               <div data-id="<%= task.id %>">
                 <a href="/tasks/<%= task.id %>" id="task-<%= task.id %>">
-                  <div class="card mb-3 task-list">
+                  <div class="card mb-3 task-list grab-me">
                     <div class="p-3 d-flex flex-row align-items-center">
 
                       <!-- Finish task -->
@@ -23,21 +23,34 @@
                       <% end %>
 
                       <div class="flex-grow-1">
-                        <!-- Task Deadline -->
-                        <% if task.deadline %>
-                          <div class="mb-2">
-                            <p class="mb-1 text-left"><small><strong><i class="far fa-calendar-alt"></i></strong> <%= task.deadline %></small></p>
-                          </div>
-                        <% end %>
+                        <div class="d-flex">
+                          <!-- Task Deadline -->
+                          <% if task.deadline %>
+                            <div class="mb-2 mr-3">
+                              <p class="mb-1 text-left text-secondary"><small><strong><i class="far fa-calendar-alt text-primary mr-1"></i></strong> <%= task.deadline.strftime('%d-%m-%Y') %></small></p>
+                            </div>
+                          <% end %>
+
+                          <% if task.priority %>
+                            <div>
+                              <p class="text-secondary mb-2"><small><strong>
+                              <% if task.priority < 3 %>
+                                <i class="fas fa-signal text-primary"></i>
+                              <% elsif task.priority == 3 %>
+                                <i class="fas fa-signal text-warning"></i>
+                              <% else %>
+                                <i class="fas fa-signal text-danger"></i>
+                              <% end %>
+                              </strong><%= task.priority %></small></p>
+                            </div>
+                          <% end %>
+                        </div>
+
                         <!-- Task title -->
                         <div class="d-flex">
                           <h5 class="mb-0">
                             <%= link_to task.title.capitalize, task_path(task) %>
                           </h5>
-
-                          <div style="margin-top: -10px; margin-left:5px">
-                            <small><span class="badge badge-primary"><%= task.priority %></span></small>
-                          </div>
                         </div>
                       </div>
 

@@ -5,21 +5,29 @@
         <div class="d-flex flex-grow-1">
           <div class="mr-3">
             <% if @task.finished? %>
-              <p><strong><i class="fas fa-toggle-on"></i></strong> Done</p>
+              <p><strong><i class="fas fa-toggle-off text-success"></i></strong> Done</p>
             <% else %>
-              <p><strong><i class="fas fa-toggle-on"></i></strong> Todo</p>
+              <p><strong><i class="fas fa-toggle-on text-warning"></i></strong> Todo</p>
             <% end %>
           </div>
           <div class="pr-3">
             <% if @task.deadline? %>
-              <p><strong><i class="far fa-calendar-alt"></i></strong> <%= @task.deadline %></p>
+              <p><strong><i class="far fa-calendar-alt text-primary"></i></strong> <%= @task.deadline.strftime('%d-%m-%Y') %></p>
             <% else %>
               <p><strong>Due date:</strong> Not set.</p>
             <% end %>
           </div>
 
           <% if @task.priority? %>
-            <p><strong><i class="fas fa-signal"></i></strong> <%= @task.priority %></p>
+            <p><strong>
+            <% if @task.priority < 3 %>
+              <i class="fas fa-signal text-primary"></i>
+            <% elsif @task.priority == 3 %>
+              <i class="fas fa-signal text-warning"></i>
+            <% else %>
+              <i class="fas fa-signal text-danger"></i>
+            <% end %>
+            </strong> <%= @task.priority %></p>
           <% end %>
         </div>
 
@@ -50,7 +58,7 @@
       <% if !@task.finished? %>
         <%= link_to finished_task_path(@task), class: 'text-decoration-none mt-3', method: :put, remote: true do %>
           <h1 class="mb-0 btn btn-success text-light d-block big-validation-btn">
-            Complete task <i class="fas fa-check"></i>
+            Complete task <i class="fas fa-check ml-2"></i>
           </h1>
         <% end %>
       <% else %>
