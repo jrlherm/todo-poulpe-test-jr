@@ -1,4 +1,9 @@
 <% if resource.errors.any? %>
+
+  <div class="logo mt-5 mb-4">
+    <%= image_tag "logo.png" %>
+  </div>
+
   <div id="error_explanation">
     <h2>
       <%= I18n.t("errors.messages.not_saved",
