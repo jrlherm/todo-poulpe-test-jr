@@ -19,7 +19,7 @@ A seed with three accounts and some tasks for two of them is available.
 * test1@test.fr | azerty
 * test2@test.fr | azerty
 * test3@test.fr | azerty - Empty account
-Feel free to create new accounts if you want to.
+(Feel free to create new accounts if you want to.)
 
 ## Technical Stack
 
