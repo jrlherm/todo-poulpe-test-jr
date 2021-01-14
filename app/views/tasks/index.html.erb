@@ -26,7 +26,7 @@
                         <!-- Task Deadline -->
                         <% if task.deadline %>
                           <div class="mb-2">
-                            <p class="mb-1"><small><strong><i class="far fa-clock"></i> Deadline:</strong> <%= task.deadline %></small></p>
+                            <p class="mb-1 text-left"><small><strong><i class="far fa-clock"></i> Deadline:</strong> <%= task.deadline %></small></p>
                           </div>
                         <% end %>
                         <!-- Task title -->
@@ -60,13 +60,13 @@
             <% end %>
           </div>
       <% else %>
-        <div class="card card-body py-3">
+        <div class="card card-body py-3 mb-3">
           <h6 class="text-left mb-0"><i class="fas fa-exclamation-circle text-warning mr-2"></i> No task to do! <%= link_to "Add some tasks", tasks_path(anchor: 'new-task') %></h6>
         </div>
       <% end %>
 
       <!-- New task form -->
-      <div class="card card-body pb-0">
+      <div class="card card-body pb-0" id="new-task">
         <%= simple_form_for([@task], remote: true) do |f| %>
           <h5 class="text-left mb-3">New task</h5>
           <div class="d-flex mx-0 px-0">
@@ -99,10 +99,10 @@
         <% end %>
       </div>
 
-      <hr class="mt-4 mb-4" id="new-task">
 
       <!-- Finished task -->
       <% if !@tasks.where(finished: true).empty? %>
+        <hr class="mt-4 mb-4">
         <h5 class="text-left my-3" style="opacity:.7">Finished task</h5>
         <ul class="list-unstyled text-left"> <!-- IF user has tasks -->
           <% @finished_tasks.each do |task| %>
