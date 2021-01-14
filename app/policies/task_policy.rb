@@ -26,6 +26,9 @@ class TaskPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def move?
+    record.user == user
+  end
   def destroy?
     record.user == user
   end
