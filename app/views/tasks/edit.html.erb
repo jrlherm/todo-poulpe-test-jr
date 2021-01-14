@@ -1,29 +1,27 @@
 <div class="container">
-  <div class="col-12 col-md-8 offset-md-2">
+  <div class="col-12 col-md-8 offset-md-2 task-form">
     <div class="text-center mt-3">
-      <h1>Edit task</h1>
-      <p>Enter infos.</p>
+      <h1 class="font-weight-bolder">Edit task</h1>
+      <p class="font-weight-light">Enter infos.</p>
     </div>
 
-    <%= simple_form_for [@task] do |f| %>
+    <%= simple_form_for([@task], remote: true) do |f| %>
       <%= f.input :title,
-                  # label: false,
                   placeholder: "Enter a title for your task*",
                   input_html: { class: "col-12 mb-3" } %>
       <%= f.input :description,
                   as: :text,
                   # label: false,
-                  placeholder: "Type a description*",
+                  placeholder: "Type a description",
                   input_html: { class: "col-12 mb-3" } %>
-      <%= f.input :deadline,
-                  as: :string,
-                  required: false,
-                  input_html: {class: "datepicker"} %>
-      <%= f.input :priority,
-                  collection: 1..5,
-                  prompt: "Select priority",
-                  selected: 1 %>
-      <%= f.input :finished %>
+      <div class="d-flex mx-0 px-0">
+        <div class="col-6 pl-0">
+          <%= f.input :priority, collection: 1..5, prompt: "Select priority", selected: 1, input_html: {class: "flex-grow-1"} %>
+        </div>
+        <div class="col-6 pr-0">
+          <%= f.input :deadline, as: :string, required: false, input_html: {class: "datepicker"} %>
+        </div>
+      </div>
       <%= f.submit 'Validate', class: "mt-2 btn btn-primary rounded-pill d-block col-12" %>
     <% end %>
     <div class="text-center">
