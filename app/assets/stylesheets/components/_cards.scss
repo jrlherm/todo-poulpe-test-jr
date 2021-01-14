@@ -1,11 +1,7 @@
 .task-list {
   border-radius: 12px;
   background: white;
-  /* White background */
   box-shadow: 0 10px 30px rgba(0, 0, 0, .1);
-  /* Light shadow */
-  cursor: grab;
-
   a {
     color: rgba(0, 0, 0, .8);
   }
@@ -14,11 +10,8 @@
 .task-card {
   border-radius: 25px;
   background: white;
-  /* White background */
   padding: 30px;
-  /* Internal space */
   box-shadow: 0 10px 30px rgba(0, 0, 0, .1);
-  /* Light shadow */
 }
 
 #comment_content {
@@ -40,4 +33,7 @@
   top: 50%;
   right: 15px;
   transform: translateY(-50%);
+}
+.grab-me {
+  cursor: grab;
 }

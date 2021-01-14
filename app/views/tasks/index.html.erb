@@ -12,7 +12,7 @@
             <% @todo_tasks.order(position: :asc).each do |task| %>
               <div data-id="<%= task.id %>">
                 <a href="/tasks/<%= task.id %>" id="task-<%= task.id %>">
-                  <div class="card mb-3 task-list">
+                  <div class="card mb-3 task-list grab-me">
                     <div class="p-3 d-flex flex-row align-items-center">
 
                       <!-- Finish task -->

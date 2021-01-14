@@ -58,7 +58,7 @@
       <% if !@task.finished? %>
         <%= link_to finished_task_path(@task), class: 'text-decoration-none mt-3', method: :put, remote: true do %>
           <h1 class="mb-0 btn btn-success text-light d-block big-validation-btn">
-            Complete task <i class="fas fa-check"></i>
+            Complete task <i class="fas fa-check ml-2"></i>
           </h1>
         <% end %>
       <% else %>
