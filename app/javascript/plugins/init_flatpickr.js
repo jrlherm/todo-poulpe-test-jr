@@ -5,6 +5,7 @@ const initFlatpickr = () => {
   const datePicker = document.querySelector('.datepicker');
 
   if (datePicker) {
+    destroy()
     flatpickr(".datepicker", {
       minDate: "today",
       altInput: true,
