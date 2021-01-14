@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :finished, :undo_finished]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :finished, :undo_finished, :move]
 
   def index
     @tasks = policy_scope(Task)
@@ -14,6 +14,7 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    head :ok
     authorize @task
   end
 
@@ -50,6 +51,11 @@ class TasksController < ApplicationController
     @task.save
 
     redirect_to tasks_path, notice: "Task undone"
+  end
+
+  def move
+    @task.insert_at(params[:position].to_i)
+    authorize @task
   end
 
   def destroy

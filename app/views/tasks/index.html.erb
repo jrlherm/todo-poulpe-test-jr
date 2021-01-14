@@ -8,53 +8,55 @@
       <% if !@tasks.where(finished: false).empty? %>
         <h3 class="text-left">To do</h3>
           <!-- IF user has tasks -->
-          <div data-controller="drag">
-            <% @todo_tasks.each do |task| %>
-              <a href="/tasks/<%= task.id %>" id="task-<%= task.id %>">
-                <div class="card mb-2">
-                  <div class="p-3 d-flex flex-row align-items-center">
+          <div data-controller="drag" data-drag-url="/tasks/:id/move">
+            <% @todo_tasks.order(position: :asc).each do |task| %>
+              <div data-id="<%= task.id %>">
+                <a href="/tasks/<%= task.id %>" id="task-<%= task.id %>">
+                  <div class="card mb-2">
+                    <div class="p-3 d-flex flex-row align-items-center">
 
-                    <!-- Finish task -->
-                    <%= link_to finished_task_path(task), method: :put, remote: true do %>
-                      <h1 class="mb-0 mr-3">
-                        <i class="fas fa-check-circle finished-button btn-hover"></i>
-                      </h1>
-                    <% end %>
-
-                    <div class="flex-grow-1">
-                      <!-- Task Deadline -->
-                      <% if task.deadline %>
-                        <div class="mb-2">
-                          <p class="mb-1"><small><strong><i class="far fa-clock"></i> Deadline:</strong> <%= task.deadline %></small></p>
-                        </div>
+                      <!-- Finish task -->
+                      <%= link_to finished_task_path(task), method: :put, remote: true do %>
+                        <h1 class="mb-0 mr-3">
+                          <i class="fas fa-check-circle finished-button btn-hover"></i>
+                        </h1>
                       <% end %>
-                      <!-- Task title -->
-                      <div class="d-flex">
-                        <h5 class="mb-0">
-                          <%= link_to task.title.capitalize, task_path(task) %>
-                        </h5>
 
-                        <div style="margin-top: -10px; margin-left:5px">
-                          <small><span class="badge badge-primary"><%= task.priority %></span></small>
+                      <div class="flex-grow-1">
+                        <!-- Task Deadline -->
+                        <% if task.deadline %>
+                          <div class="mb-2">
+                            <p class="mb-1"><small><strong><i class="far fa-clock"></i> Deadline:</strong> <%= task.deadline %></small></p>
+                          </div>
+                        <% end %>
+                        <!-- Task title -->
+                        <div class="d-flex">
+                          <h5 class="mb-0">
+                            <%= link_to task.title.capitalize, task_path(task) %>
+                          </h5>
+
+                          <div style="margin-top: -10px; margin-left:5px">
+                            <small><span class="badge badge-primary"><%= task.priority %></span></small>
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    <div class="ml-auto">
-                      <div>
-                          <!-- Edit task -->
-                          <%= link_to edit_task_path(task) do %>
-                            <i class="fas fa-pencil-alt text-warning btn-hover mr-2"></i>
-                          <% end %>
-                          <!-- Delete task -->
-                          <%= link_to task_path(task), data: {confirm: "Are you sure?"}, remote: true, :method => :delete do %>
-                            <i class="fas fa-trash-alt text-danger btn-hover"></i>
-                          <% end %>
+                      <div class="ml-auto">
+                        <div>
+                            <!-- Edit task -->
+                            <%= link_to edit_task_path(task) do %>
+                              <i class="fas fa-pencil-alt text-warning btn-hover mr-2"></i>
+                            <% end %>
+                            <!-- Delete task -->
+                            <%= link_to task_path(task), data: {confirm: "Are you sure?"}, remote: true, :method => :delete do %>
+                              <i class="fas fa-trash-alt text-danger btn-hover"></i>
+                            <% end %>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </a>
+                </a>
+              </div>
             <% end %>
           </div>
       <% else %>
